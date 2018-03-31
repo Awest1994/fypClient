@@ -4,5 +4,11 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [
+    {
+        "path": "/test",
+        "proxyUrl": "https://example.net//test-view1.html"
+    }
+]
 }

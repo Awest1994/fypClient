@@ -1,0 +1,9 @@
+page-dashboard {
+    .bg{
+        background-color: rgba(48,60,108,0.2)
+    }
+
+    .highlight{
+        color: map-get($colors, primary);
+    }
+}

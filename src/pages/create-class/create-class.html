@@ -1,0 +1,38 @@
+<!--
+  Generated template for the CreateClassPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Create a Class</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label color="primary" floating>Class Title</ion-label>
+    <ion-input type="text" [(ngModel)]="title" name="title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" floating>Class Code</ion-label>
+    <ion-input type="text" [(ngModel)]="module_code" name="module_code"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label text-wrap floating style="color: #F4976C">Should this class be visible to students?</ion-label>
+    <ion-select interface="popover" [(ngModel)]="archived" name="archived">
+      <ion-option value="Yes">Yes</ion-option>
+      <ion-option value="No">No</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item no-lines>
+      <button ion-button round small (click)="createClass()">Create</button>
+  </ion-item>
+</ion-content>

@@ -1,0 +1,87 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Classroom</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="bg">
+
+  <ion-grid>
+    <!-- Profile Avatar -->
+    <button padding ion-item no-lines (click)="goToProfile()">
+      <ion-avatar padding-horizontal item-start>
+        <img src="assets/imgs/avatar.png">
+      </ion-avatar>
+      <h1 text-wrap>{{userInfo.name}}</h1>
+      <h3 text-wrap>{{userInfo.university}}</h3>
+      <p text-wrap>{{userInfo.role}}</p>
+    </button>
+
+
+    <ion-row padding-top>
+      <ion-col col-12 col-sm>
+        <!-- Classes -->
+        <ion-item-divider class="highlight">
+          <button ion-button icon-only item-end clear (click)="goToCreateClass()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          My Classes
+        </ion-item-divider>
+
+        <ion-item no-lines *ngIf="userClasses == null || userClasses == undefined || userClasses.length == 0">
+          <h3 text-left>You have no classes.</h3>
+        </ion-item>
+
+        <ion-item no-lines>
+          <ion-card *ngFor="let item of userClasses">
+            <button ion-item text-wrap (click)="goToClass(item)">
+              <h2>{{item.title}}</h2>
+              <h3>Code: {{item.module_code}}</h3>
+            </button>
+          </ion-card>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-12 col-sm>
+        <!-- Assignments -->
+        <ion-item-divider class="highlight">
+          <button ion-button icon-only item-end clear (click)="goToCreateAssign()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          Assignments
+        </ion-item-divider>
+
+        <ion-item no-lines *ngIf="userAssignments == null || userAssignments == undefined || userAssignments.length == 0">
+          <h3 text-left>There are no assignments.</h3>
+        </ion-item>
+
+        <ion-item no-lines>
+          <ng-container *ngIf="userAssignments != null || userAssignments != undefined || userAssignments.length != 0">
+            <ion-card *ngFor="let item of userAssignments">
+              <button ion-item text-wrap (click)="goToAssignment()">
+                <h2>{{item.Title}}</h2>
+                <h3>{{item.Module}}</h3>
+              </button>
+            </ion-card>
+          </ng-container>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Home -->
+  <div style="text-align:center">
+    <button ion-button round small (click)="goToHome()">Home</button>
+  </div>
+
+</ion-content>
