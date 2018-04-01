@@ -42,8 +42,7 @@ export class CreateClassPage {
     this.request = this.classroom.create(this.classInfo);
     this.request.subscribe((resp) => {
       this.navCtrl.push("ClassPage", {
-        title: this.title,
-        module_code: this.module_code
+        class: this.classInfo
       });
       this.viewCtrl.dismiss();
     }, err => {

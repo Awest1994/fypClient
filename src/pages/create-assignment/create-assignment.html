@@ -22,6 +22,10 @@
                     class="well my-drop-zone">
                     Drop Files Here
                 </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col width-60>
                 <br> Single
                 <br>
                 <input type="file" ng2FileSelect [uploader]="uploader" />
@@ -29,11 +33,6 @@
                 <br> Multiple
                 <br>
                 <input type="file" ng2FileSelect [uploader]="uploader" multiple />
-
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col width-60>
                 <h3>Upload queue</h3>
                 <p>Queue length: {{ uploader?.queue?.length }}</p>
                 <table class="table">
