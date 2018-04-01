@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FileUploader, FileDropDirective, FileSelectDirective} from 'ng2-file-upload';
 
 /**
@@ -33,9 +33,10 @@ export class CreateAssignmentPage {
     this.hasAnotherDropZoneOver = e;
   }
   
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
     this.uploader.onCompleteItem = (item:any, response:any , status:any, headers:any) => {
       this.attachmentList.push(response);
+      this.navCtrl.setRoot("DashboardPage");
   }
   }
 

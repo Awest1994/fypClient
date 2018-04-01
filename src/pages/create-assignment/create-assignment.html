@@ -1,98 +1,58 @@
 <!--
-  Generated template for the CreateAssignmentPage page.
+  Generated template for the UploadPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
 
-    <ion-navbar color="primary">
-        <ion-title>Create an Assignment</ion-title>
-    </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-    <ion-grid>
-        <ion-row>
-            <ion-col width-40 [ngStyle]="{'background-color': 'Bisque'}">
-                <h3>Select files</h3>
-                <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
-                    class="well my-drop-zone">
-                    Drop Files Here
-                </div>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col width-60>
-                <br> Single
-                <br>
-                <input type="file" ng2FileSelect [uploader]="uploader" />
-                <br>
-                <br> Multiple
-                <br>
+        <ion-navbar color="primary">
+          <ion-title>Upload</ion-title>
+        </ion-navbar>
+      
+      </ion-header>
+      
+      
+      <ion-content padding>
+        <ion-grid>
+          <ion-row>
+            <ion-col width-40>
+              <h3>Select file(s)</h3>
+              <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader"
+                class="well my-drop-zone">
+                Drop File(s) Here
+              </div>
+              <div padding-vertical>
                 <input type="file" ng2FileSelect [uploader]="uploader" multiple />
-                <h3>Upload queue</h3>
-                <p>Queue length: {{ uploader?.queue?.length }}</p>
-                <table class="table">
-                    <tbody>
-                        <tr *ngFor="let item of uploader.queue">
-                            <td>
-                                <strong>{{ item.file.name }}</strong>
-                            </td>
-                            <td nowrap>{{ item.file.size/1024/1024 | number:'.2' }} MB</td>
-                            <td>
-                                <td *ngIf="uploader.isHTML5">
-                                    <progress id="progressbar" max="100" value="{{ item.progress }}"> </progress>
-                                    <div id="progressbarlabel">{{ item.progress }} %</div>
-                                </td>
-                                <td class="text-center">
-                                    <span *ngIf="item.isCancel">
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </span>
-                                    <span *ngIf="item.isError">
-                                        <ion-icon name="trash"></ion-icon>
-                                    </span>
-                                </td>
-                                <td nowrap>
-                                    <button ion-button icon-right *ngIf="!item.isSuccess" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">Upload
-                                        <ion-icon name="cloud-upload"></ion-icon>
-                                    </button>
-                                    <button ion-button icon-right *ngIf="!item.isSuccess" (click)="item.remove()" [ngStyle]="{'background-color': '#D2691E'}">Cancel
-                                        <ion-icon name="close-circle"></ion-icon>
-                                    </button>
-                                    <button ion-button icon-right *ngIf="!item.isSuccess" color="danger">Remove
-                                        <ion-icon name="trash"></ion-icon>
-                                    </button>
-                                    <button ion-button icon-right *ngIf="item.isSuccess" [ngStyle]="{'background-color': 'Green'}">Image Uploaded!
-                                        <ion-icon name="checkmark-circle-outline"></ion-icon>
-                                    </button>
-                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <div>
-                    <div>
-                        Queue progress:
-                        <progress id="progressbar" [ngStyle]="{'background-color': 'Green'}" max="100" value="{{ uploader.progress }}"> </progress>
-                        <div id="progressbarlabel">{{ uploader.progress }} %</div>
-                    </div>
-                    <button ion-button icon-right (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Upload all
-                        <ion-icon name="cloud-upload"></ion-icon>
-                    </button>
-                    <button ion-button icon-right (click)="uploader.cancelAll()" [ngStyle]="{'background-color': '#D2691E'}" [disabled]="!uploader.isUploading">Cancel all
-                        <ion-icon name="close-circle"></ion-icon>
-                    </button>
-                    <button ion-button icon-right color="danger" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">Remove all
-                        <ion-icon name="trash"></ion-icon>
-                    </button>
-                    <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading"></button>
-                    <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                    </button>
-                </div>
+              </div>
             </ion-col>
-        </ion-row>
-    </ion-grid>
-</ion-content>
+          </ion-row>
+          <ion-row>
+            <ion-col width-60>
+              <table class="table">
+                <tbody>
+                  <tr *ngFor="let item of uploader.queue">
+                    <td>
+                      <strong>{{ item.file.name }}</strong>
+                    </td>
+                    <td nowrap>{{ item.file.size/1024/1024 | number:'.2' }} MB</td>
+                    <td *ngIf="uploader.isHTML5">
+                      <progress id="progressbar" max="100" value="{{ item.progress }}"> </progress>
+                      <div id="progressbarlabel">{{ item.progress }} %</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <div>
+                <button ion-button small icon-right (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">Upload
+                  <ion-icon name="cloud-upload"></ion-icon>
+                </button>
+                <button ion-button small icon-right (click)="uploader.cancelAll()" [ngStyle]="{'background-color': '#D2691E'}" [disabled]="!uploader.isUploading">Cancel
+                  <ion-icon name="close-circle"></ion-icon>
+                </button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-content>

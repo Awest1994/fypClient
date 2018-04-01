@@ -78,7 +78,7 @@ export class DashboardPage {
   }
 
   goToCreateAssign() {
-    let modal = this.modalCtrl.create("CreateAssignmentPage");
+    let modal = this.modalCtrl.create("ActivitiesPage");
     modal.present();
   }
 
