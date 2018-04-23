@@ -28,13 +28,21 @@ export class AuthService {
         return this.http.post(link, data, header).map((res: Response) => res);
     }
 
-    testUser(token,data) {
-        let stringToken = JSON.stringify(token);
-        var link = "http://localhost:3000/auth/user-test";
+    // testUser(token,data) {
+    //     let stringToken = JSON.stringify(token);
+    //     var link = "http://localhost:3000/auth/user-test";
+    //     var header = { "headers": { "Content-Type": "application/json" } };
+    //     data = JSON.stringify(data);
+
+    //     return this.http.post(link, data, header).map((res: Response) => res);
+
+    // }
+
+    getUserInfo(email){
+
+        var link = "http://localhost:3000/user/" + email;
         var header = { "headers": { "Content-Type": "application/json" } };
-        data = JSON.stringify(data);
 
-        return this.http.post(link, data, header).map((res: Response) => res);
-
+        return this.http.get(link, header).map((res: Response) => res);
     }
 }

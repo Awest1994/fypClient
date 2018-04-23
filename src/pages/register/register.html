@@ -6,12 +6,16 @@
       <ion-col padding col-md-6 push-md-3 class="center">
 
         <h2 padding text-center style="color:white;">Welcome to your Classroom!</h2>
-        <h3 padding text-center style="color:white;">Please input the desired information and token to create an account.</h3>
+        <!-- <h3 padding text-center style="color:white;">Please input the desired information and given token to create an account.</h3> -->
 
         <div class="border">
           <ion-item>
+            <ion-label color="primary" floating>Name</ion-label>
+            <ion-input type="text" [(ngModel)]="name" name="name"></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label color="primary" floating>Email</ion-label>
-            <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+            <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
           </ion-item>
 
           <ion-item>

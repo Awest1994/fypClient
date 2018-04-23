@@ -17,7 +17,11 @@ import { HomePage } from '../home/home';
 })
 export class RegisterPage {
 
-  username: any;
+  name: any;
+  nameArray: any;
+  first: any;
+  last: any;
+  email: any;
   password: any;
   university: any;
   token: any;
@@ -39,24 +43,34 @@ export class RegisterPage {
   }
 
   register() {
+    this.nameArray = this.name.split(" ");
+    this.first = this.nameArray[0];
+    this.last = this.nameArray[1];
+
     this.userInfo = {
-      email: this.username,
+      name:{
+        first: this.first,
+        last: this.last
+      },
+      email: this.email,
       password: this.password,
-      university: this.university
+      university: this.university,
+      token: this.token
     }
 
     this.request = this.auth.register(this.userInfo);
     this.request.subscribe((resp) => {
 
-      if (resp.status) {
+      if (!resp.status) {
         console.log("Teacher Registered");
         console.log(resp);
-        localStorage.setItem('username', this.username);
+        localStorage.setItem('email', this.email);
         localStorage.setItem('uid', resp.account._id);
-        localStorage.setItem('Role', resp.account.role);
+        localStorage.setItem('info', resp);
+        // localStorage.setItem('Role', resp.account.role);
         this.goToDash();
       }
-      else if(!resp.status){
+      else if(resp.status){
         console.log("Error");
       }
       else {

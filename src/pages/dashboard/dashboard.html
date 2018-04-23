@@ -6,8 +6,13 @@
 -->
 <ion-header>
 
-  <ion-navbar color="primary">
-    <ion-title>Classroom</ion-title>
+  <ion-navbar color="primary" align-title="left">
+    <ion-title>Classroom - Dashboard</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToHome()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -31,7 +36,7 @@
       <ion-col col-12 col-sm>
         <!-- Classes -->
         <ion-item-divider class="highlight">
-          <button ion-button icon-only item-end clear (click)="goToCreateClass()">
+          <button *ngIf="role" ion-button icon-only item-end clear (click)="goToCreateClass()">
             <ion-icon name="add"></ion-icon>
           </button>
           My Classes
@@ -54,10 +59,10 @@
       <ion-col col-12 col-sm>
         <!-- Assignments -->
         <ion-item-divider class="highlight">
-          <button ion-button icon-only item-end clear (click)="goToCreateAssign()">
+          <button *ngIf="role" ion-button icon-only item-end clear (click)="goToCreateAssign()">
             <ion-icon name="add"></ion-icon>
           </button>
-          Assignments
+          My Activities
         </ion-item-divider>
 
         <ion-item no-lines *ngIf="userAssignments == null || userAssignments == undefined || userAssignments.length == 0">
@@ -76,12 +81,60 @@
         </ion-item>
 
       </ion-col>
+
+      <ion-col col-12 col-sm>
+        <!-- Assignments -->
+        <ion-item-divider class="highlight">
+          <button *ngIf="role" ion-button icon-only item-end clear (click)="goToCreateGroup()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          My Groups
+        </ion-item-divider>
+
+        <ion-item no-lines *ngIf="userGroups == null || userGroups == undefined || userGroups.length == 0">
+          <h3 text-left>You have no groups.</h3>
+        </ion-item>
+
+        <ion-item no-lines>
+          <ng-container *ngIf="userGroups != null || userGroups != undefined || userGroups.length != 0">
+            <ion-card *ngFor="let item of userGroups">
+              <button ion-item text-wrap (click)="goToGroup()">
+                <h2>{{item.name}}</h2>
+
+              </button>
+            </ion-card>
+          </ng-container>
+        </ion-item>
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row padding-top>
+      <ion-col col-12 col-sm>
+        <ion-item-divider class="highlight">
+          <button ion-button icon-only item-end clear (click)="goToUpload()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          My Files
+        </ion-item-divider>
+        <ion-item no-lines *ngIf="userFiles == null || userFiles == undefined || userFiles.length == 0">
+          <h3 text-left>You have no files.</h3>
+        </ion-item>
+        <ion-item>
+          <ng-container>
+            <!-- <ion-card > -->
+              <button *ngFor="let files of userFiles" ion-item text-wrap (click)="goToPDF(files.name)">
+                {{files.name}}
+              </button>
+            <!-- </ion-card> -->
+          </ng-container>
+        </ion-item>
+      </ion-col>
     </ion-row>
   </ion-grid>
 
-  <!-- Home -->
-  <div style="text-align:center">
-    <button ion-button round small (click)="goToHome()">Home</button>
-  </div>
 
 </ion-content>
+<ion-footer text-end>
+  <p padding-horizontal>Classroom by Adam West & David Kerr</p>
+</ion-footer>

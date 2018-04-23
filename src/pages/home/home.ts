@@ -35,10 +35,11 @@ export class HomePage {
 
       if (resp != null || resp != undefined) {
 
-        if (resp.token === undefined) console.log("Email not found");
+        if (!resp.status) console.log("Email not found");
         else {
+          //console.log("info saved")
           localStorage.setItem('username', this.username);
-          localStorage.setItem('myToken', resp.token);
+          localStorage.setItem('myToken', resp.user.token);
           this.goToDash();
         }
       }

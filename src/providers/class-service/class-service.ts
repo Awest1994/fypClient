@@ -19,14 +19,14 @@ export class ClassService {
         return this.http.post(link, data, header).map((res: Response) => res);
     }
 
-    getClasses(teacher_id) {
-        var link = 'http://localhost:3000/class/classes/' + teacher_id;
+    // getClasses(teacher_id) {
+    //     var link = 'http://localhost:3000/class/classes/' + teacher_id;
 
-        return this.http.get(link).map((res: Response) => res);
-    }
+    //     return this.http.get(link).map((res: Response) => res);
+    // }
 
     getStudents(module_code) {
-        var link = 'http://localhost:3000/class/students/' + module_code;
+        var link = 'http://localhost:3000/classes/students/' + module_code;
 
         return this.http.get(link).map((res: Response) => res);
     }

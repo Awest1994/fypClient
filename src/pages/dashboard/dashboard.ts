@@ -19,25 +19,95 @@ import { ClassService } from '../../providers/class-service/class-service';
 })
 export class DashboardPage {
 
+  
   userInfo = {
     name: "Test",
-    role: "Test",
+    role: "Teacher",
     university: "Test University"
-  }
-  userAssignments = [
+  };
+  userClasses = [
     // {
-    //   Title: "Lab 1",
-    //   Module: "CS424"
+    //   title: "Test",
+    //   module_code: "Test_Code"
+    // },
+    // {
+    //   title: "Test",
+    //   module_code: "Test_Code"
+    // },
+    // {
+    //   title: "Test",
+    //   module_code: "Test_Code"
+    // },
+    // {
+    //   title: "Test",
+    //   module_code: "Test_Code"
+    // },
+    // {
+    //   title: "Test",
+    //   module_code: "Test_Code"
+    // },
+    // {
+    //   title: "Test",
+    //   module_code: "Test_Code"
     // }
   ];
-  userClasses = [
+
+  userAssignments = [
     {
-      title: "Test",
-      module_code: "Test_Code"
+      Title: "Lab 1",
+      Module: "CSCR055"
+    },
+    {
+      Title: "Lab 2",
+      Module: "CS055"
+    },
+    {
+      Title: "Lab 1",
+      Module: "CR000"
     }
   ];
+  
+  userGroups = [
+    {
+      name: "Introduction to Classroom - Square",
+      students: [],
+      activities: []
+    }
+    //,
+    // {
+    //   name: "Class name - A",
+    //   students: [],
+    //   activities: []
+    // },
+    // {
+    //   name: "Class name - A",
+    //   students: [],
+    //   activities: []
+    // }
+  ];
+  pdfSrc: String = "https://vadimdez.github.io/ng2-pdf-viewer/pdf-test.pd";
+  userFiles = [
+    {
+      name: this.pdfSrc,
+      students: [],
+      activities: []
+    }
+    ,
+    // {
+    //   name: "http://gahp.net/wp-content/uploads/2017/09/sample.pdf",
+    //   students: [],
+    //   activities: []
+    // },
+    // {
+    //   name: "Class name - A",
+    //   students: [],
+    //   activities: []
+    // }
+  ];
 
+  role = false;
   request: any;
+
   requestData = {
     email: localStorage.getItem("username")
   }
@@ -49,7 +119,10 @@ export class DashboardPage {
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad");
+    //console.log("ionViewDidLoad");
+    if(this.userInfo.role == "Teacher" || this.userInfo.role == "teacher"){
+      this.role = true;
+    }
     this.getUserInfo();
   }
 
@@ -64,12 +137,27 @@ export class DashboardPage {
     });
   }
 
+  goToGroup(){
+    this.navCtrl.push("GroupsPage");
+  }
+
   goToAssignment() {
     this.navCtrl.push("AssignmentPage");
   }
 
   goToProfile() {
-    this.navCtrl.push("ProfilePage");
+    this.navCtrl.push("ProfilePage", {info: this.userInfo});
+  }
+
+  goToUpload(){
+    let modal = this.modalCtrl.create('CreateAssignmentPage');
+    modal.present();
+  }
+
+  goToPDF(url){
+    this.navCtrl.push("PdfPage", {
+      url: url
+    });
   }
 
   goToCreateClass() {
@@ -82,25 +170,25 @@ export class DashboardPage {
     modal.present();
   }
 
+  goToCreateGroup(){
+    let modal = this.modalCtrl.create("CreateGroupsPage");
+    modal.present();
+  }
+
   getUserInfo() {
-    console.log('user information');
-    this.request = this.auth.testUser(this.token, this.requestData);
+    //console.log('user information');
+    this.request = this.auth.getUserInfo(localStorage.getItem('username'));
     this.request.subscribe((resp) => {
-      this.userInfo.name = resp.account.email;
-      this.userInfo.role = resp.account.role;
-      this.userInfo.university = resp.account.university;
-
-      localStorage.setItem('uid', resp.account._id);
-    }, err => {
-      console.log(err + " : Error");
-    });
-
-    this.request = this.classroom.getClasses(localStorage.getItem('uid'));
-    this.request.subscribe((resp) => {
+      //console.log(resp);
+      this.userInfo.name = resp.name.first;
+      this.userInfo.university = resp.university;
+      this.userInfo.role = resp.role;
       this.userClasses = resp.classes;
+      // this.userGroups = resp.groups;
+      //this.userFiles = resp.files;
+      
     }, err => {
       console.log(err + " : Error");
     });
   }
-
 }

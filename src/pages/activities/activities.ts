@@ -20,15 +20,11 @@ export class ActivitiesPage {
   activities = [
     {
       name: "Discussion",
-      icon: "chatbubbles",
       page: "ChatRoomPage",
-      number: 1
     },
     {
       name: "Upload",
-      icon: "cloud-upload",
       page: "CreateAssignmentPage",
-      number: 2
     }
   ];
 
@@ -41,12 +37,12 @@ export class ActivitiesPage {
   }
 
   activity(item) {
-    if (item.number != 1) {
-      this.navCtrl.setRoot(item.page);
+    if (item.page == 'ChatRoomPage') {
+      this.joinChat();
     }
 
     else {
-      this.joinChat();
+      this.navCtrl.push(item.page);
     }
   }
 

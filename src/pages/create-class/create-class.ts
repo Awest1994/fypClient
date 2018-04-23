@@ -17,7 +17,7 @@ import { ClassService } from '../../providers/class-service/class-service';
 export class CreateClassPage {
   title: any;
   module_code: any;
-  teacher = localStorage.getItem('uid');
+  teacher = localStorage.getItem('username');
   archived: any;
 
   classInfo: any;
@@ -35,8 +35,9 @@ export class CreateClassPage {
     this.classInfo = {
       title: this.title,
       module_code: this.module_code,
-      teacher: [this.teacher],
-      archived: this.archived
+      teacher: {
+        email: this.teacher
+      }
     }
 
     this.request = this.classroom.create(this.classInfo);

@@ -11,6 +11,9 @@ import { HomePage } from '../pages/home/home';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { ClassService } from '../providers/class-service/class-service';
 import { SocketIoModule, SocketIoConfig} from 'ng-socket-io';
+import { GridsterModule } from 'angular2gridster';
+
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 @NgModule({
   declarations: [
@@ -20,6 +23,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
   imports: [
     BrowserModule,
     HttpClientModule,
+    GridsterModule,
     SocketIoModule.forRoot(config),
     IonicModule.forRoot(MyApp, {
       mode: 'md'

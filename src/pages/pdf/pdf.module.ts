@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { DashboardPage } from './dashboard';
+import { PdfPage } from './pdf';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
-    DashboardPage,
+    PdfPage,
   ],
   imports: [
     PdfViewerModule,
-    IonicPageModule.forChild(DashboardPage),
+    IonicPageModule.forChild(PdfPage),
   ],
 })
-export class DashboardPageModule {}
+export class PdfPageModule {}
